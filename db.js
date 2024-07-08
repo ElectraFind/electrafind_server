@@ -1,10 +1,10 @@
-const Pool = require('pg').Pool;
-const {Sequelize} = require('sequelize');
+const {Pool} = require('pg');
+// const {Sequelize} = require('sequelize');
 
 const pool = new Pool({
     user: "postgres",
     host: "localhost",
-    databse: "students",
+    database: "electrafind",
     password: "root",
     port: 5432,
 });
@@ -17,4 +17,6 @@ pool.connect((err)=>{
     }
 });
 
-module.exports = pool;
+module.exports = {
+    query: (text,params)=> pool.query(text,params),
+};

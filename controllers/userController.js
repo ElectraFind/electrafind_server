@@ -1,4 +1,4 @@
-const User = require('../models/user');
+// const User = require('../models/user');
 
 // Register a new user
 exports.register = async (req, res) => {
@@ -15,7 +15,7 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        const user = await User.findByCredentials(email, password);
+        // const user = await User.findByCredentials(email, password);
         if (!user) {
             return res.status(401).send({ error: 'Login failed! Check authentication credentials' });
         }
@@ -38,7 +38,7 @@ exports.logout = (req, res) => {
 // Get all users
 exports.getAllUsers = async (req, res) => {
     try {
-        const users = await User.find({});
+        // const users = await User.find({});
         res.send(users);
     } catch (error) {
         res.status(500).send(error);
@@ -48,7 +48,7 @@ exports.getAllUsers = async (req, res) => {
 // Get a user by ID
 exports.getUserById = async (req, res) => {
     try {
-        const user = await User.findById(req.params.id);
+        // const user = await User.findById(req.params.id);
         if (!user) {
             return res.status(404).send();
         }
@@ -61,7 +61,7 @@ exports.getUserById = async (req, res) => {
 // Update a user
 exports.updateUser = async (req, res) => {
     try {
-        const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+        // const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
         if (!user) {
             return res.status(404).send();
         }
@@ -74,7 +74,7 @@ exports.updateUser = async (req, res) => {
 // Delete a user
 exports.deleteUser = async (req, res) => {
     try {
-        const user = await User.findByIdAndDelete(req.params.id);
+        // const user = await User.findByIdAndDelete(req.params.id);
         if (!user) {
             return res.status(404).send();
         }

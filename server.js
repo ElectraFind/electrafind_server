@@ -4,7 +4,7 @@
 // const app = express()
 // const port = 3001
 
-
+const srv = require('./validators') 
 // //middle ware
 // app.use(express.json());
 
@@ -13,9 +13,9 @@
 // app.get('/',(req,res)=>{
 //     res.send('hello node api')
 // })
-// // app.get('/blog',(req,res)=>{
-// //     res.send('hello blog im lakindu')
-// // })
+// app.get('/blog',(req,res)=>{ 
+//     res.send('hello blog im lakindu')
+// })
 
 // app.use('/api/v1/students', studentRoutes);
 
@@ -27,13 +27,16 @@
 
 
 
-const express = require('express');
-const app = express();
-require('dotenv').config();
+// const express = require('express');
+// const app = express();
+// require('dotenv').config();
 // const sequelize = require('./db');
 // const models = require('./models'); 
 
-const userRoutes = require('./routes/userRoutes');
+
+
+
+// const userRoutes = require('./routes/userRoutes');
 // const driverRoutes = require('./routes/driverRoutes');
 // const stationHostRoutes = require('./routes/stationHostRoutes');
 // const adminRoutes = require('./routes/adminRoutes');
@@ -47,10 +50,15 @@ const userRoutes = require('./routes/userRoutes');
 // const authRoutes = require('./routes/authRoutes');
 // const { protect } = require('../middlewares/authMiddleware');
 
-app.use(express.json());
+// app.get('/',(req,res)=>{
+//     res.send('now in the server');
+// });
+// app.use(express.json());
+
+
 
 // app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
+// app.use('/api/users', protect,userRoutes);
 // app.use('/api/drivers', protect, driverRoutes);
 // app.use('/api/station-hosts', protect, stationHostRoutes);
 // app.use('/api/admins', protect, adminRoutes);
@@ -63,7 +71,7 @@ app.use('/api/users', userRoutes);
 // app.use('/api/notifications', protect, notificationRoutes);
 
 // const PORT = process.env.PORT || 5000;
-const port = 3001
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+// const port = 4000
+// app.listen(port, () => {
+//   console.log(`Server is running on port ${port}`);
+// });
