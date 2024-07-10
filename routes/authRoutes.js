@@ -1,16 +1,14 @@
 const {Router} = require('express');
-const {getUsers, register}= require('../controllers/auth')
-const {registerValidation}=require('../validators/auth')
-const {validationMiddleware}=require('../middlewares/authmiddleware')
-// const controller = require('../controllers/authController');
+const controller = require('../controllers/authController');
+const authController = require('../controllers/userController')
 
 const router = Router();
 
-// router.post("/register",authController.register);
-// router.post("/login",authController.login);
-// router.get("/logout",authController.logout);
-router.get('/get-users',getUsers)
-router.post('/register',registerValidation,register)
+router.post("/register",authController.register);
+router.post("/login",authController.login);
+router.get("/logout",authController.logout);
+// router.get('/get-users',getUsers)
+// router.post('/register',registerValidation,validationMiddleware,register)
 
 // router.patch("/sendCode",authController.resendCode);
 // router.patch("/verify",authController.verifyUser); 
@@ -29,16 +27,16 @@ router.post('/register',registerValidation,register)
 
 
 // router
-//     .route("/")
-//     .get(controller.getUsers)
-//     .post(controller.addUser)
+    // .route("/")
+    // .get(controller.getUsers)
+    //  .post(controller.addUser)
 
 // router
-//     .route("/:id")
-//     .get(controller.getUserById)
-//     .put(controller.updateUser)
-//     .delete(controller.removeUser)
-
+    // .route("/:id")
+    // .get(controller.getUserById)
+    // .put(controller.updateUser)
+    // .delete(controller.removeUser)
+// 
 
  
 module.exports = router;

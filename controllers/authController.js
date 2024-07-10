@@ -1,24 +1,36 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-// const User = require('../models/user');
+const User = require('../models/user');
+
+
+exports.getUsers= async(req,res)=>{
+    try {
+        // --just to see how many rows
+        console.log('in the getusers')
+        const {rowCount} =await db.query('select * from users')
+        console.log(rowCount)
+    } catch (error) {
+        console.log(error.message)
+    }
+}
 
 exports.register = async (req, res) => {
     try {
         const { name, email, password } = req.body;
 
         // Check if user already exists
-        // let user = await User.findOne({ where: { email } });
+        let user = await User.findOne({ where: { email } });
         if (user) {
             return res.status(400).json({ message: 'User already exists' });
         }
 
         // Create new user
         const hashedPassword = await bcrypt.hash(password, 10);
-        // // user = await User.create({
-        //     name,
-        //     email,
-        //     password: hashedPassword
-        // });
+        user = await User.create({
+            name,
+            email,
+            password: hashedPassword
+        });
 
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
@@ -32,9 +44,9 @@ exports.login = async (req, res) => {
 
         // Check if user exists
         const user = await User.findOne({ where: { email } });
-        // if (!user) {
-        //     return res.status(400).json({ message: 'Invalid credentials' });
-        // }
+        if (!user) {
+            return res.status(400).json({ message: 'Invalid credentials' });
+        }
 
         // Validate password
         const isMatch = await bcrypt.compare(password, user.password);

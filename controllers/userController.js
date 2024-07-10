@@ -1,11 +1,13 @@
-// const User = require('../models/user');
+const User = require('../models/user');
 
 // Register a new user
 exports.register = async (req, res) => {
     try {
+        console.log('inthe register')
         const user = new User(req.body);
         await user.save();
         res.status(201).send(user);
+        console.log('user saved')
     } catch (error) {
         res.status(400).send(error);
     }
@@ -38,7 +40,7 @@ exports.logout = (req, res) => {
 // Get all users
 exports.getAllUsers = async (req, res) => {
     try {
-        // const users = await User.find({});
+        const users = await User.find({});
         res.send(users);
     } catch (error) {
         res.status(500).send(error);

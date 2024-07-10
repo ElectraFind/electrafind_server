@@ -15,17 +15,16 @@ exports.register=async(req,res)=>{
     const {email,password}=req.body
     try {
         const hashedpassword = await hash(password,10)
-        await db.query('INSERT INTO users(email) VALUES( $1  )',[
+        await db.query('INSERT INTO users(email,password) VALUES( $1 , $2 )',[
             email,
+            hashedpassword,
            
         ])
-        const {rowCount,rows} =await db.query('select * from users');
-        console.log(rows);
+        // const {rowCount,rows} =await db.query('select * from users');
+        // console.log(rows);
         return res.status(201).json({
             success:true,
-            data:rows,
             message:'registration successful',
-            count:rowCount,
         })
     } catch (error) {
         console.log(error.message)
