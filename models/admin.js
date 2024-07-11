@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../db');
 
-const Admin = sequelize.define('Admin', {
+const Admin = sequelize.define('admins', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -10,7 +10,7 @@ const Admin = sequelize.define('Admin', {
   userId: {
     type: DataTypes.UUID,
     references: {
-      model: 'Users',
+      model: 'users',
       key: 'id',
     },
   },

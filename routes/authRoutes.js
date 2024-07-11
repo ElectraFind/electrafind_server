@@ -26,9 +26,9 @@ router.get("/logout",authController.logout);
 
 
 
-// router
-    // .route("/")
-    // .get(controller.getUsers)
+router
+    .route("/")
+    .get(controller.getUsers)
     //  .post(controller.addUser)
 
 // router

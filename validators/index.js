@@ -15,19 +15,19 @@ const stationHostRoutes = require('../routes/stationHostRoutes');
 const adminRoutes = require('../routes/adminRoutes');
 const vehicleRoutes = require('../routes/vehicleRoutes');
 const stationRoutes = require('../routes/stationRoutes');
-const bookingRoutes = require('./routes/bookingRoutes');
+const bookingRoutes = require('../routes/bookingRoutes');
 const chargingSessionRoutes = require('../routes/chargingSessionRoutes');
 const paymentRoutes = require('../routes/paymentRoutes');
 const garageRoutes = require('../routes/garageRoutes');
-const notificationRoutes = require('../routes/notificationRoutes');
 const authRoutes = require('../routes/authRoutes');
 const { protect } = require('../middlewares/authmiddleware');
+// const notificationRoutes = require('../routes/notificationRoutes');
 
 
 //initialize routes
 
 app.use('/api/auth', authRoutes);
-app.use('/api/users', protect,userRoutes);
+app.use('/api/users',userRoutes);
 app.use('/api/drivers', protect, driverRoutes);
 app.use('/api/station-hosts', protect, stationHostRoutes);
 app.use('/api/admins', protect, adminRoutes);
@@ -37,7 +37,7 @@ app.use('/api/bookings', protect, bookingRoutes);
 app.use('/api/charging-sessions', protect, chargingSessionRoutes);
 app.use('/api/payments', protect, paymentRoutes);
 app.use('/api/garages', protect, garageRoutes);
-app.use('/api/notifications', protect, notificationRoutes);
+// app.use('/api/notifications', protect, notificationRoutes);
 
 
 
@@ -67,11 +67,3 @@ appStart()
 
 
 
-
-// app.get('/',(req,res)=>{
-//         res.send('hello node api')
-//     })  
-
-// app.get('/blog',(req,res)=>{
-//             res.send('hello e api')
-//         })

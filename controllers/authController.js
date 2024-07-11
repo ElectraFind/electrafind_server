@@ -8,6 +8,7 @@ exports.getUsers= async(req,res)=>{
         // --just to see how many rows
         console.log('in the getusers')
         const {rowCount} =await db.query('select * from users')
+        res.send('frrr')
         console.log(rowCount)
     } catch (error) {
         console.log(error.message)
@@ -16,7 +17,7 @@ exports.getUsers= async(req,res)=>{
 
 exports.register = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { email, password,name } = req.body;
 
         // Check if user already exists
         let user = await User.findOne({ where: { email } });
@@ -27,9 +28,9 @@ exports.register = async (req, res) => {
         // Create new user
         const hashedPassword = await bcrypt.hash(password, 10);
         user = await User.create({
-            name,
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            name,
         });
 
         res.status(201).json({ message: 'User registered successfully' });

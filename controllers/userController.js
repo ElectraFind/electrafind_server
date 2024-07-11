@@ -17,7 +17,7 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        // const user = await User.findByCredentials(email, password);
+        const user = await User.findByCredentials(email, password);
         if (!user) {
             return res.status(401).send({ error: 'Login failed! Check authentication credentials' });
         }
@@ -26,7 +26,7 @@ exports.login = async (req, res) => {
         res.status(400).send(error);
     }
 };
-
+ 
 // Logout a user
 exports.logout = (req, res) => {
     try {
@@ -38,8 +38,9 @@ exports.logout = (req, res) => {
 };
 
 // Get all users
-exports.getAllUsers = async (req, res) => {
+exports.getAllUsers = async (req, res) => { 
     try {
+        res.send({ message: 'all users' });
         const users = await User.find({});
         res.send(users);
     } catch (error) {
