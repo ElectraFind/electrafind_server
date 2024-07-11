@@ -1,19 +1,20 @@
-const Pool = require('pg').Pool;
 
-const pool = new Pool({
-    user: "postgres",
-    host: "localhost",
-    databse: "students",
-    password: "root",
-    port: 5432,
+const {SERVER_URL}=require('./constants/index');
+const { Sequelize } = require('sequelize');
+require('dotenv').config();
+
+const sequelize = new Sequelize(SERVER_URL, {
+  dialect: 'postgres',
+  protocol: 'postgres',
+  logging: false, // Disable logging or set to console.log for debugging
 });
 
-pool.connect((err)=>{
-    if(err){
-        console.error('connection error', err.stack)
-    }else{
-        console.log('connected')
-    }
-});
+sequelize.authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch((err) => {
+    console.error('Unable to connect to the database:', err);
+  });
 
-module.exports = pool;
+module.exports = sequelize;
