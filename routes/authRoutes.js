@@ -1,12 +1,14 @@
 const {Router} = require('express');
-const controller = require('../controllers/authController');
-const authController = require('../controllers/userController')
+const authController = require('../controllers/authController');
+const controller = require('../controllers/userController')
 
 const router = Router();
 
 router.post("/register",authController.register);
 router.post("/login",authController.login);
 router.get("/logout",authController.logout);
+
+
 // router.get('/get-users',getUsers)
 // router.post('/register',registerValidation,validationMiddleware,register)
 
@@ -28,15 +30,15 @@ router.get("/logout",authController.logout);
 
 router
     .route("/")
-    .get(controller.getUsers)
-    //  .post(controller.addUser)
+    .get(controller.getAllUsers)
+    .post(controller.addUser)
 
-// router
-    // .route("/:id")
-    // .get(controller.getUserById)
-    // .put(controller.updateUser)
-    // .delete(controller.removeUser)
-// 
+router
+    .route("/:id")
+    .get(controller.getUserById)
+    .put(controller.updateUser)
+    .delete(controller.deleteUser)
 
- 
+
+  
 module.exports = router;

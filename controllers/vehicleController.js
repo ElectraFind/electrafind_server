@@ -1,4 +1,4 @@
-const Vehicle = require('../models/Vehicle');
+// const Vehicle = require('../models/vehicle');
 
 // Create a new vehicle
 exports.createVehicle = async (req, res) => {
@@ -14,7 +14,7 @@ exports.createVehicle = async (req, res) => {
 // Get all vehicles
 exports.getAllVehicles = async (req, res) => {
     try {
-        const vehicles = await Vehicle.find({});
+        // const vehicles = await Vehicle.find({});
         res.send(vehicles);
     } catch (error) {
         res.status(500).send(error);

@@ -1,23 +1,13 @@
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+// const sequelize = require('../db');
 const User = require('../models/user');
 
 
-exports.getUsers= async(req,res)=>{
-    try {
-        // --just to see how many rows
-        console.log('in the getusers')
-        const {rowCount} =await db.query('select * from users')
-        res.send('frrr')
-        console.log(rowCount)
-    } catch (error) {
-        console.log(error.message)
-    }
-}
 
 exports.register = async (req, res) => {
     try {
-        const { email, password,name } = req.body;
+        const { id,email, password,name,role } = req.body;
 
         // Check if user already exists
         let user = await User.findOne({ where: { email } });
@@ -28,24 +18,28 @@ exports.register = async (req, res) => {
         // Create new user
         const hashedPassword = await bcrypt.hash(password, 10);
         user = await User.create({
-            email,
+            id,
+            email, 
             password: hashedPassword,
             name,
+            role,
+           
         });
 
-        res.status(201).json({ message: 'User registered successfully' });
+        res.status(201).json({ message: 'User registered successfully' }); 
     } catch (error) {
         res.status(500).json({ message: 'Server error', error });
     }
+    // console.log({rows})
 };
-
+ 
 exports.login = async (req, res) => {
-    try {
+    try {  
         const { email, password } = req.body;
 
         // Check if user exists
         const user = await User.findOne({ where: { email } });
-        if (!user) {
+        if (!user) { 
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
@@ -64,7 +58,7 @@ exports.login = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Server error', error });
     }
-};
+}; 
 
 exports.logout = (req, res) => {
     res.json({ message: 'Logged out successfully' });

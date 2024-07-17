@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../db');
 
-const StationHost = sequelize.define('StationHost', {
+const StationHost = sequelize.define('station_hosts', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,

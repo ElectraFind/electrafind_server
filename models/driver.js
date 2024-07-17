@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../db');
 
-const Driver = sequelize.define('Driver', {
+const Driver = sequelize.define('drivers', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
