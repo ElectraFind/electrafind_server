@@ -12,6 +12,9 @@ const User = sequelize.define('users', {
     type: DataTypes.STRING(255),
     allowNull: false,
     unique: true,
+    validate:{
+      isEmail: true
+    }
   },
   password: {
     type: DataTypes.STRING(255),
@@ -40,7 +43,7 @@ const User = sequelize.define('users', {
 
 }, {
   timestamps: false,
-  // tableName: 'users',
+  tableName: 'users',
   // createdAt: 'created_at',
   // updatedAt: 'updated_at',
 });
