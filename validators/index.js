@@ -1,12 +1,18 @@
 const express = require('express')
 const bcrypt = require ('bcryptjs')
 const jwt = require ('jsonwebtoken')
+const cors = require('cors');
 const app = express()
 const {PORT}= require('../constants')
 const sequelize = require('../db')
 // const models = require('../models')(sequelize)
 
 app.use(express.json())
+
+// allow request from frontend
+app.use(cors({
+  origin: 'http://localhost:5500/'
+}))
 
 //import routes
 
