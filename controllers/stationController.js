@@ -1,4 +1,4 @@
-const Station = require('../models/Station');
+const Station = require('../models/station');
 
 // Create a new station
 exports.createStation = async (req, res) => {

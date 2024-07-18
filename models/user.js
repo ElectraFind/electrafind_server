@@ -6,26 +6,46 @@ const User = sequelize.define('users', {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
+    
   },
   email: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(255),
     allowNull: false,
     unique: true,
+    validate:{
+      isEmail: true
+    }
   },
   password: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(255),
     allowNull: false,
   },
   name: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: DataTypes.STRING(255),
+    allowNull: true,
   },
   role: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: DataTypes.STRING(50),
+    allowNull: true, 
   },
+//   createdAt: {
+//     type: DataTypes.DATE,
+//     field: 'created_at',
+//     defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+//     allowNull: false,
+// },
+// updatedAt: {
+//     type: DataTypes.DATE,
+//     field: 'updated_at',
+//     defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+//     allowNull: false,
+// },
+
 }, {
-  timestamps: true,
+  timestamps: false,
+  tableName: 'users',
+  // createdAt: 'created_at',
+  // updatedAt: 'updated_at',
 });
 
 module.exports = User;

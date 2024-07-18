@@ -1,4 +1,4 @@
-const StationHost = require('../models/StationHost');
+const StationHost = require('../models/stationHost');
 
 // Create a new station host
 exports.createStationHost = async (req, res) => {

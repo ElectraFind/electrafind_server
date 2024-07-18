@@ -1,4 +1,4 @@
-const ChargingSession = require('../models/ChargingSession');
+const ChargingSession = require('../models/chargingSession');
 
 // Create a new charging session
 exports.createChargingSession = async (req, res) => {

@@ -115,7 +115,7 @@ CREATE TABLE notifications (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
--- Stores reviews for stations.
+-- Stores reviews for stations. 
 CREATE TABLE reviews (
     id SERIAL PRIMARY KEY,
     driver_id INTEGER REFERENCES drivers(id),

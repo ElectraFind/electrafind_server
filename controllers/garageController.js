@@ -1,4 +1,4 @@
-const Garage = require('../models/Garage');
+const Garage = require('../models/garage');
 
 // Create a new garage
 exports.createGarage = async (req, res) => {
