@@ -1,25 +1,42 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../db');
 
-const StationHost = sequelize.define('station_hosts', {
+const StationHost = sequelize.define('station_host', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
-  },
-  userId: {
-    type: DataTypes.UUID,
-    references: {
-      model: 'Users',
-      key: 'id',
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
     },
-  },
-  stationName: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
+    name: {
+        type: DataTypes.STRING(100),
+        allowNull: false
+    },
+    phone_number: {
+        type: DataTypes.STRING(15),
+        allowNull: false
+    },
+    email: {
+        type: DataTypes.STRING(100),
+        allowNull: false
+    },
+    availability: {
+        type: DataTypes.ENUM('available', 'unavailable', 'under repair'),
+        allowNull: false 
+    },
+    // created_at: {
+    //     type: DataTypes.DATE,
+    //     allowNull: false,
+    //     defaultValue: DataTypes.NOW
+    // },
+    // updated_at: {
+    //     type: DataTypes.DATE,
+    //     allowNull: false,
+    //     defaultValue: DataTypes.NOW
+    // }
 }, {
-  timestamps: true,
+    tableName: 'station_host',
+    timestamps: false, // Enable Sequelize's automatic timestamp management
+    // underscored: true // This option makes Sequelize use snake_case for column names
 });
 
 module.exports = StationHost;

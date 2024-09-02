@@ -16,32 +16,65 @@ CREATE TABLE drivers (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
---  Stores additional information specific to station hosts.
-CREATE TABLE station_hosts (
+
+CREATE TABLE drivers (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id),
-    company_name VARCHAR(255),
+    license_number VARCHAR(255),
+    vehicle_model VARCHAR(255),
+    battery_capacity DECIMAL,
+    rating DECIMAL(3, 2),
+    payment_information TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+); 
+
+--  Stores additional information specific to station hosts.
+-- CREATE TABLE station_hosts (
+--     id SERIAL PRIMARY KEY,
+--     user_id INTEGER REFERENCES users(id),
+--     company_name VARCHAR(255),
+--     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- );
+CREATE TABLE station_host (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    phone_number VARCHAR(15) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    availability VARCHAR(20) NOT NULL CHECK (availability IN ('available', 'unavailable', 'under repair')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 -- Stores additional information specific to admins.
 CREATE TABLE admins (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users(id),
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 --  Stores information about charging stations.
+-- CREATE TABLE stations (
+--     id SERIAL PRIMARY KEY,
+--     host_id INTEGER REFERENCES station_hosts(id),
+--     name VARCHAR(255),
+--     location VARCHAR(255),
+--     status VARCHAR(50) CHECK (status IN ('available', 'busy', 'under_maintenance')),
+--     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+--     -- latitude DECIMAL(10, 8),
+--     -- longitude DECIMAL(11, 8),
+-- );
+
 CREATE TABLE stations (
     id SERIAL PRIMARY KEY,
+    station_name VARCHAR(100) NOT NULL,
     host_id INTEGER REFERENCES station_hosts(id),
-    name VARCHAR(255),
-    location VARCHAR(255),
-    latitude DECIMAL(10, 8),
-    longitude DECIMAL(11, 8),
-    status VARCHAR(50) CHECK (status IN ('available', 'busy', 'under_maintenance')),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    location VARCHAR(255) NOT NULL,
+    status VARCHAR(50) CHECK (status IN ('available', 'busy', 'under_maintenance'))
 );
 -- Stores booking information.
 CREATE TABLE bookings (
@@ -124,4 +157,16 @@ CREATE TABLE reviews (
     comment TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE provinces_data (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  province VARCHAR(255) NOT NULL,
+  type1 INT NOT NULL,
+  type2 INT NOT NULL,
+  type3 INT NOT NULL,
+--   type3_color VARCHAR(255) NOT NULL
+--   type1_color VARCHAR(255) NOT NULL,
+--   type2_color VARCHAR(255) NOT NULL,
 );

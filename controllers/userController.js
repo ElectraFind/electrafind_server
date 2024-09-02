@@ -9,7 +9,7 @@ exports.register = async (req, res) => {
         res.status(201).send(user);
         console.log('user saved')
     } catch (error) {
-        res.status(400).send(error);
+        res.status(400).send(error); 
     }
 };
 // exports.signup = (req,res)=>{

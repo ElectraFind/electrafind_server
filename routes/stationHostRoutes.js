@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const StationHostController = require('../controllers/StationHostController');
+const StationHostController = require('../controllers/stationHostController');
 
 router.post('/', StationHostController.createStationHost);
 router.get('/', StationHostController.getAllStationHosts);

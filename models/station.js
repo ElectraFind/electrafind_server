@@ -7,10 +7,18 @@ const Station = sequelize.define('stations', {
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
+  station_name: {
+    type: DataTypes.UUID,
+    allowNull: false,
+    references:{
+      model:'stationHost',
+      key: 'company_name',
+    },
+  },
   stationHostId: {
     type: DataTypes.UUID,
     references: {
-      model: 'StationHosts',
+      model: 'StationHost',
       key: 'id',
     },
   },
@@ -23,7 +31,7 @@ const Station = sequelize.define('stations', {
     allowNull: false,
   },
 }, {
-  timestamps: true,
+  timestamps: false,
 });
 
 module.exports = Station;

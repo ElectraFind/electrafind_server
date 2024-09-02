@@ -14,7 +14,8 @@ exports.createStation = async (req, res) => {
 // Get all stations
 exports.getAllStations = async (req, res) => {
     try {
-        const stations = await Station.find({});
+        console.log('getall stsations')
+        const stations = await Station.findAll({});
         res.send(stations);
     } catch (error) {
         res.status(500).send(error);

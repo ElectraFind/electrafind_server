@@ -37,15 +37,17 @@ exports.login = async (req, res) => {
     try {  
         const { email, password } = req.body;
 
-        // Check if user exists
+        // Check if user email exists
         const user = await User.findOne({ where: { email } });
         if (!user) { 
+            console.log('no user in the database');
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
         // Validate password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
+            console.log('password doesnt match in the database');
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 

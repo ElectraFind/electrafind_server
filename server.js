@@ -1,2 +1,1 @@
-const postgres = require('pg')
-const srv = require('./validators/index') 
+const srv = require('./validators/index')
