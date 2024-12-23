@@ -1,61 +1,52 @@
-const Booking = require('../models/booking');
-
-// Create a new booking
-exports.createBooking = async (req, res) => {
-    try {
-        const booking = new Booking(req.body);
-        await booking.save();
-        res.status(201).send(booking);
-    } catch (error) {
-        res.status(400).send(error);
-    }
-};
+const { Booking, TimeSlot, User, ChargingStation } = require('../models');
 
 // Get all bookings
 exports.getAllBookings = async (req, res) => {
-    try {
-        const bookings = await Booking.find({});
-        res.send(bookings);
-    } catch (error) {
-        res.status(500).send(error);
-    }
+  try {
+    const bookings = await Booking.findAll({ include: [User, ChargingStation, TimeSlot] });
+    res.json(bookings);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
 
-// Get a booking by ID
+// Get booking by ID
 exports.getBookingById = async (req, res) => {
-    try {
-        const booking = await Booking.findById(req.params.id);
-        if (!booking) {
-            return res.status(404).send();
-        }
-        res.send(booking);
-    } catch (error) {
-        res.status(500).send(error);
-    }
+  try {
+    const booking = await Booking.findByPk(req.params.id, { include: [User, ChargingStation, TimeSlot] });
+    if (!booking) return res.status(404).json({ message: 'Booking not found' });
+    res.json(booking);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Create a new booking
+exports.createBooking = async (req, res) => {
+  try {
+    const newBooking = await Booking.create(req.body);
+    res.status(201).json(newBooking);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
 
 // Update a booking
 exports.updateBooking = async (req, res) => {
-    try {
-        const booking = await Booking.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
-        if (!booking) {
-            return res.status(404).send();
-        }
-        res.send(booking);
-    } catch (error) {
-        res.status(400).send(error);
-    }
+  try {
+    const updated = await Booking.update(req.body, { where: { BookingID: req.params.id } });
+    res.json({ updated });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
 
 // Delete a booking
 exports.deleteBooking = async (req, res) => {
-    try {
-        const booking = await Booking.findByIdAndDelete(req.params.id);
-        if (!booking) {
-            return res.status(404).send();
-        }
-        res.send(booking);
-    } catch (error) {
-        res.status(500).send(error);
-    }
+  try {
+    const deleted = await Booking.destroy({ where: { BookingID: req.params.id } });
+    res.json({ deleted });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };

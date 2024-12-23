@@ -7,7 +7,7 @@ const sequelize = new Sequelize('electrafind','postgres','root', {
   host: 'localhost',
   dialect: 'postgres',
   protocol: 'postgres',
-  logging: false, // Disable logging or set to console.log for debugging
+  logging: console.log, // Disable logging or set to console.log for debugging
 });
 
 sequelize.sync();
@@ -19,4 +19,4 @@ sequelize.authenticate()
     console.error('Unable to connect to the database:', err);
   });
 module.exports = sequelize; 
- 
+  

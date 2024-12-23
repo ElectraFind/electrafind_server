@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const ChargingSessionController = require('../controllers/chargingSessionController');
+const chargingSessionController = require('../controllers/chargingSessionController');
 
-router.post('/', ChargingSessionController.createChargingSession);
-router.get('/', ChargingSessionController.getAllChargingSessions);
-router.get('/:id', ChargingSessionController.getChargingSessionById);
-router.put('/:id', ChargingSessionController.updateChargingSession);
-router.delete('/:id', ChargingSessionController.deleteChargingSession);
+router.get('/', chargingSessionController.getAllChargingSessions);
+router.get('/:id', chargingSessionController.getChargingSessionById);
+router.post('/', chargingSessionController.createChargingSession);
+router.put('/:id', chargingSessionController.updateChargingSession);
+router.delete('/:id', chargingSessionController.deleteChargingSession);
 
 module.exports = router;
