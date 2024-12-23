@@ -1,7 +1,7 @@
 const {DataTypes} = require('sequelize');
 module.exports = (sequelize) => {
-    const Booking = sequelize.define('bookings', {
-      BookingID: {
+    const Rating = sequelize.define('ratings', {
+      RatingID: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
@@ -10,20 +10,23 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      SlotID: {
+      StationID: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      ReferenceNumber: {
-        type: DataTypes.STRING,
-        unique: true,
+      Rating: {
+        type: DataTypes.INTEGER,
         allowNull: false,
+        validate: { min: 1, max: 5 },
       },
-      BookingTime: {
+      Comment: {
+        type: DataTypes.TEXT,
+      },
+      RatedAt: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       },
     });
-    return Booking;
+    return Rating;
   };
   

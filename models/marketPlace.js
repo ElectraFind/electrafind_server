@@ -1,29 +1,30 @@
 const {DataTypes} = require('sequelize');
 module.exports = (sequelize) => {
-    const Vehicle = sequelize.define('vehicles', {
-      VehicleID: {
+    const Marketplace = sequelize.define('marketplace', {
+      ProductID: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      UserID: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      VehicleModel: {
+      Name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      RegistrationNumber: {
-        type: DataTypes.STRING,
-        unique: true,
+      Description: {
+        type: DataTypes.TEXT,
+      },
+      Price: {
+        type: DataTypes.FLOAT,
         allowNull: false,
       },
-      BatteryID: {
+      Stock: {
         type: DataTypes.INTEGER,
         allowNull: false,
+      },
+      AddedByUserID: {
+        type: DataTypes.INTEGER,
       },
     });
-    return Vehicle;
+    return Marketplace;
   };
   

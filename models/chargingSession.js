@@ -1,33 +1,33 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../db');
-
-const ChargingSession = sequelize.define('charging_sessions', {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
-  },
-  bookingId: {
-    type: DataTypes.UUID,
-    references: {
-      model: 'Bookings',
-      key: 'id',
-    },
-  },
-  startTime: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-  endTime: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-  energyConsumed: {
-    type: DataTypes.FLOAT,
-    allowNull: false,
-  },
-}, {
-  timestamps: true,
-});
-
-module.exports = ChargingSession;
+const {DataTypes} = require('sequelize');
+module.exports = (sequelize) => {
+    const ChargingSession = sequelize.define('chargingsessions', {
+      SessionID: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      BookingID: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      StartTime: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      EndTime: {
+        type: DataTypes.DATE,
+      },
+      PowerCharged: {
+        type: DataTypes.FLOAT,
+      },
+      Cost: {
+        type: DataTypes.FLOAT,
+      },
+      Status: {
+        type: DataTypes.ENUM('InProgress', 'Completed', 'Cancelled'),
+        allowNull: false,
+      },
+    });
+    return ChargingSession;
+  };
+  

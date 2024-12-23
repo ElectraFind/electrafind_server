@@ -1,29 +1,29 @@
+
 const {DataTypes} = require('sequelize');
 module.exports = (sequelize) => {
-    const Booking = sequelize.define('bookings', {
-      BookingID: {
+    const TimeSlot = sequelize.define('timeslots', {
+      SlotID: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      UserID: {
+      StationID: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      SlotID: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      ReferenceNumber: {
-        type: DataTypes.STRING,
-        unique: true,
-        allowNull: false,
-      },
-      BookingTime: {
+      StartTime: {
         type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
+        allowNull: false,
+      },
+      EndTime: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      IsAvailable: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
       },
     });
-    return Booking;
+    return TimeSlot;
   };
   

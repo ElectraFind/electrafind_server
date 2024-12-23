@@ -1,29 +1,32 @@
 const {DataTypes} = require('sequelize');
 module.exports = (sequelize) => {
-    const Booking = sequelize.define('bookings', {
-      BookingID: {
+    const Transaction = sequelize.define('transactions', {
+      TransactionID: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
+      },
+      SessionID: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
       UserID: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      SlotID: {
-        type: DataTypes.INTEGER,
+      AmountPaid: {
+        type: DataTypes.FLOAT,
         allowNull: false,
       },
-      ReferenceNumber: {
-        type: DataTypes.STRING,
-        unique: true,
+      PaymentMethod: {
+        type: DataTypes.ENUM('CreditCard', 'DebitCard', 'UPI', 'Wallet'),
         allowNull: false,
       },
-      BookingTime: {
+      TransactionTime: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       },
     });
-    return Booking;
+    return Transaction;
   };
   
